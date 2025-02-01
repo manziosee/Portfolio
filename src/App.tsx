@@ -4,6 +4,7 @@ import { Background3D } from './components/Background3D';
 import { GitHubStats } from './components/GitHubStats';
 import { LanguageGraph3D } from './components/LanguageGraph3D';
 import { useGSAPAnimations } from './hooks/useGSAPAnimations';
+import { MatrixBackground } from './components/MatrixBackground';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className={`min-h-screen theme-transition ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+      <MatrixBackground />
       <Background3D />
 
       {/* Theme Toggle */}
@@ -155,6 +157,64 @@ function App() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Most Used Languages */}
+        <section className="mb-16">
+          <div className="flex items-center mb-8 animate-slide-in-left">
+            <Code className="w-8 h-8 text-blue-500 mr-3" />
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Most Used Languages</h2>
+          </div>
+          <div className={`p-8 ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} rounded-xl shadow-xl animate-scale-in backdrop-blur-sm border ${darkMode ? 'border-gray-700/50' : 'border-gray-200/50'} hover:scale-105 transition-transform`}>
+            <h3 className="text-xl font-semibold mb-6">Programming Languages</h3>
+            <div className="space-y-4">
+              {[
+                { name: 'TypeScript', percentage: 48.97 },
+                { name: 'Python', percentage: 19.40 },
+                { name: 'JavaScript', percentage: 18.79 },
+                { name: 'Java', percentage: 6.69 },
+                { name: 'Vue', percentage: 3.75 },
+                { name: 'PowerShell', percentage: 2.39 }
+              ].map((lang) => (
+                <div key={lang.name} className="flex items-center group">
+                  <div className="w-8 h-8 mr-3">
+                    {lang.name === 'TypeScript' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" className="w-full h-full" />}
+                    {lang.name === 'Python' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="w-full h-full" />}
+                    {lang.name === 'JavaScript' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="w-full h-full" />}
+                    {lang.name === 'Java' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" className="w-full h-full" />}
+                    {lang.name === 'Vue' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue" className="w-full h-full" />}
+                    {lang.name === 'PowerShell' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/powershell/powershell-original.svg" alt="PowerShell" className="w-full h-full" />}
+                  </div>
+                  <span className="group-hover:text-blue-500 transition-colors">{lang.name} ({lang.percentage}%)</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={`p-8 ${darkMode ? 'bg-gray-800/90' : 'bg-white/90'} rounded-xl shadow-xl animate-scale-in backdrop-blur-sm border ${darkMode ? 'border-gray-700/50' : 'border-gray-200/50'} hover:scale-105 transition-transform mt-8`}>
+            <h3 className="text-xl font-semibold mb-6">Web Technologies</h3>
+            <div className="space-y-4">
+              {[
+                { name: 'HTML', percentage: 32.72 },
+                { name: 'TypeScript', percentage: 30.62 },
+                { name: 'Python', percentage: 12.01 },
+                { name: 'JavaScript', percentage: 11.64 },
+                { name: 'CSS', percentage: 8.88 },
+                { name: 'Java', percentage: 4.14 }
+              ].map((tech) => (
+                <div key={tech.name} className="flex items-center group">
+                  <div className="w-8 h-8 mr-3">
+                    {tech.name === 'HTML' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" className="w-full h-full" />}
+                    {tech.name === 'TypeScript' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" className="w-full h-full" />}
+                    {tech.name === 'Python' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="w-full h-full" />}
+                    {tech.name === 'JavaScript' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="w-full h-full" />}
+                    {tech.name === 'CSS' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" className="w-full h-full" />}
+                    {tech.name === 'Java' && <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" className="w-full h-full" />}
+                  </div>
+                  <span className="group-hover:text-blue-500 transition-colors">{tech.name} ({tech.percentage}%)</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
