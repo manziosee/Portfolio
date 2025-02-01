@@ -1,59 +1,48 @@
 import { useEffect, useRef } from 'react';
 
 export function MatrixBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const languages = [
+      'TypeScript (48.97%)',
+      'Python (19.4%)',
+      'JavaScript (18.79%)',
+      'Java (6.69%)',
+      'Vue (3.75%)',
+      'PowerShell (2.39%)',
+      'HTML (32.72%)',
+      'TypeScript (30.62%)',
+      'Python (12.01%)',
+      'JavaScript (11.64%)',
+      'CSS (8.88%)',
+      'Java (4.14%)'
+    ];
 
-    const columns = Math.floor(window.innerWidth / 20) + 1;
-    const drops: number[] = Array.from({ length: columns }, () => 1);
+    const createBox = (text: string) => {
+      const box = document.createElement('div');
+      box.className = 'matrix-box';
+      box.textContent = text;
+      box.style.top = `${Math.random() * 100}vh`;
+      box.style.left = `${Math.random() * 100}vw`;
+      container.appendChild(box);
+    };
 
-    function draw() {
-      if (!ctx || !canvas) return;
+    languages.forEach(createBox);
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#0F0';
-      ctx.font = '700 20px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = String.fromCharCode(Math.floor(Math.random() * 75) + 48);
-        ctx.fillText(text, i * 20, drops[i] * 20);
-
-        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    function resizeCanvas() {
-      if (!canvas) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(() => {
+      languages.forEach(createBox);
+    }, 2000);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
       clearInterval(interval);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="matrix-background"
-    />
+    <div ref={containerRef} className="matrix-background"></div>
   );
 }
