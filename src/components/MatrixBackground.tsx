@@ -14,9 +14,9 @@ export function MatrixBackground() {
     const drops: number[] = Array.from({ length: columns }, () => 1);
 
     function draw() {
-      if (!ctx) return;
+      if (!ctx || !canvas) return;
+
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      if (!canvas) return;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = '#0F0';
@@ -53,15 +53,7 @@ export function MatrixBackground() {
   return (
     <canvas
       ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-        pointerEvents: 'none',
-      }}
+      className="matrix-background"
     />
   );
 }
